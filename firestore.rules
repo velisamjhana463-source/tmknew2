@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 2. Lead Validation Helper
+    function isValidLead(data) {
+      return data.name is string 
+          && data.name.size() > 0 
+          && data.name.size() <= 100
+          && data.phone is string 
+          && data.phone.size() > 0 
+          && data.phone.size() <= 50
+          && (!data.keys().contains('contact') || (data.contact is string && data.contact.size() <= 100))
+          && (!data.keys().contains('projectType') || (data.projectType is string && data.projectType.size() <= 50))
+          && (!data.keys().contains('comment') || (data.comment is string && data.comment.size() <= 2000))
+          && data.createdAt is timestamp;
+    }
+
+    // 3. Leads collection
+    match /leads/{leadId} {
+      // Create is open to the public but strictly validated
+      allow create: if request.resource.data.keys().hasAll(['name', 'phone', 'createdAt'])
+                   && request.resource.data.keys().size() <= 6
+                   && isValidLead(request.resource.data)
+                   && request.resource.data.createdAt == request.time;
+      
+      // Prevent anyone from reading lists or single items client-side
+      allow read, update, delete, list: if false;
+    }
+  }
+}

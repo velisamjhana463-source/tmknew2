@@ -1,0 +1,9 @@
+{
+  "apiKey": "AIzaSyDummyKeyForCompilationOnly",
+  "authDomain": "tmk-web-dummy.firebaseapp.com",
+  "projectId": "tmk-web-dummy",
+  "storageBucket": "tmk-web-dummy.appspot.com",
+  "messagingSenderId": "123456789012",
+  "appId": "1:123456789012:web:abcdef123456abcdef",
+  "firestoreDatabaseId": "(default)"
+}

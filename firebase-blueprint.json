@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "leads": {
+      "title": "Lead",
+      "description": "Incoming client requests and project briefs from the landing page",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Lead full name or business name"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "contact": {
+          "type": "string",
+          "description": "Additional contact info, e.g., Email or Telegram handle"
+        },
+        "projectType": {
+          "type": "string",
+          "enum": [
+            "landing",
+            "corporate",
+            "ecommerce",
+            "refactoring",
+            "consultation"
+          ],
+          "description": "Type of development service requested"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Optional comments or project requirements"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the lead was captured"
+        }
+      },
+      "required": [
+        "name",
+        "phone"
+      ]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": "leads",
+      "description": "Submission store for business development leads"
+    }
+  }
+}

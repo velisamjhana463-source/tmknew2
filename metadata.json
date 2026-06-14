@@ -1,0 +1,8 @@
+{
+  "name": "TMK WEB",
+  "description": "Современный, премиальный одностраничный сайт для веб-студии TMK WEB, разрабатывающей сайты, лендинги и интернет-магазины для бизнеса.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
